@@ -7,9 +7,20 @@ async function startCapture(displayMediaOptions) {
         captureStream = await navigator.mediaDevices.getDisplayMedia(
             displayMediaOptions
         );
+
+        // Get audio stream from microphone
+        const audioStream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+        });
+
+        // Add microphone audio track to screen capture stream
+        audioStream.getAudioTracks().forEach((track) => {
+            captureStream.addTrack(track);
+        });
     } catch (err) {
         console.error(`Error: ${err}`);
     }
+
     return captureStream;
 }
 
