@@ -1,0 +1,48 @@
+let recordButton = document.getElementById("record");
+
+async function startCapture(displayMediaOptions) {
+    let captureStream = null;
+
+    try {
+        captureStream = await navigator.mediaDevices.getDisplayMedia(
+            displayMediaOptions
+        );
+    } catch (err) {
+        console.error(`Error: ${err}`);
+    }
+    return captureStream;
+}
+
+recordButton.addEventListener("click", async () => {
+    let captureStream = await startCapture({
+        video: {
+            cursor: "always",
+        },
+        audio: true,
+    });
+
+    let recorder = new MediaRecorder(captureStream);
+
+    let data = [];
+
+    recorder.ondataavailable = (event) => data.push(event.data);
+    recorder.start();
+
+    let stop = document.getElementById("stop");
+
+    stop.addEventListener("click", () => {
+        recorder.stop();
+    });
+
+    recorder.onstop = (event) => {
+        let recordedBlob = new Blob(data, {
+            type: "video/webm",
+        });
+
+        let recordedVideo = document.createElement("video");
+        recordedVideo.controls = true;
+        recordedVideo.src = URL.createObjectURL(recordedBlob);
+
+        document.body.appendChild(recordedVideo);
+    };
+});
