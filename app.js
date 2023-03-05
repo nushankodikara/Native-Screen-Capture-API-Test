@@ -37,12 +37,17 @@ recordButton.addEventListener("click", async () => {
     let data = [];
 
     recorder.ondataavailable = (event) => data.push(event.data);
+
     recorder.start();
 
     let stop = document.getElementById("stop");
 
     stop.addEventListener("click", () => {
-        recorder.stop();
+        try {
+            recorder.stop();
+        } catch (error) {
+            console.log({ msg: "Stop button pressed without recording." });
+        }
     });
 
     recorder.onstop = (event) => {
@@ -53,7 +58,9 @@ recordButton.addEventListener("click", async () => {
         let recordedVideo = document.createElement("video");
         recordedVideo.controls = true;
         recordedVideo.src = URL.createObjectURL(recordedBlob);
+        recordedVideo.classList.add("w-1/4", "rounded-lg");
 
-        document.body.appendChild(recordedVideo);
+        let recordHolder = document.getElementById("videos");
+        recordHolder.appendChild(recordedVideo);
     };
 });
