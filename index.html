@@ -8,27 +8,81 @@
         <link rel="stylesheet" href="style.css" />
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="app.js" defer></script>
+        <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
     </head>
-    <body class="text-center">
-        <h1 class="text-4xl font-bold p-4">Screen Capture API</h1>
-        <!-- Record Button -->
-        <button
-            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-            id="record"
-        >
-            Record
-        </button>
-        <!-- Stop Button -->
-        <button
-            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-            id="stop"
-        >
-            Stop
-        </button>
+    <body class="text-center font-mono">
+        <div class="flex flex-row justify-around p-4">
+            <h1 class="text-4xl font-bold p-4">Screen Capture API</h1>
+            <!-- Record Button -->
+            <div class="flex flex-row gap-4 justify-center">
+                <div class="flex flex-col justify-center p-4">
+                    <!-- checkbox to check and uncheck audio -->
+                    <input type="checkbox" id="audio" checked />
+                    <label for="audio">Audio</label>
+                </div>
+                <button
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg flex flex-row gap-2 items-center w-44 justify-center"
+                    id="record"
+                >
+                    <lord-icon
+                        src="https://cdn.lordicon.com/fpipqhrr.json"
+                        trigger="click"
+                        colors="primary:#121331,secondary:#ffffff"
+                        style="width: 50px; height: 50px"
+                    >
+                    </lord-icon>
+                    Record
+                </button>
+                <!-- Stop Button -->
+                <button
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg flex flex-row gap-2 items-center w-44 justify-center"
+                    id="stop"
+                >
+                    <lord-icon
+                        src="https://cdn.lordicon.com/rcopausw.json"
+                        trigger="click"
+                        colors="primary:#121331,secondary:#ffffff"
+                        style="width: 50px; height: 50px"
+                    >
+                    </lord-icon>
+                    Stop
+                </button>
+            </div>
+        </div>
+        <div class="bg-red-500 text-white py-4 px-8 shadow-md hover:shadow-lg">
+            <h2 class="text-2xl">Instructions for Using Screen Recorder</h2>
+            <br />
+            <p class="text-left">
+                To use this screen recorder, simply press the "Record" button to
+                start recording your screen and microphone. When you're
+                finished, press the "Stop" button to stop the recording. The
+                recorded video will be displayed in the video player on the
+                page.
+            </p>
+            <br />
+            <p class="text-left">
+                To download the recorded video, click on the three-dot menu in
+                the top right corner of the video player and select "Download".
+                The video will be downloaded to your device for offline viewing.
+            </p>
+        </div>
         <br />
         <div
-            class="w-full p-4 flex flex-row flex-wrap gap-4 justify-between"
+            class="w-full p-4 flex flex-row flex-wrap gap-4 justify-between py-16"
             id="videos"
         ></div>
+        <footer
+            class="bg-white w-full h-16 bottom-0 fixed flex flex-col justify-center items-center"
+        >
+            <p class="text-gray-500 text-sm">
+                Made with ❤️ by
+                <a
+                    class="text-blue-500 hover:text-blue-700"
+                    href="https://www.nushankodikara.com"
+                >
+                    Nushan Kodikara</a
+                >
+            </p>
+        </footer>
     </body>
 </html>
